@@ -1,11 +1,26 @@
 class UserController < ApplicationController
-	def spotify
-		    spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+	before_action :authenticate_user!
 
-		if(params[:hello] == "Bitch I got it out the muscle")
-			render :json => {"reply": "You wanna fight I wanna Tussle"}
-		else
-			puts("What bro?")
-		end
+	def spotify
+		spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+		render json: spotify_user
 	end
+	def home 
+		render json: current_user
+	end
+	def info
+		render json: "You can enter this data"
+	end
+	def spotify_access_token
+		access_token = params[:access_token] 
+		current_user.spotify_account_token = access_token 
+
+		if current_user.save
+			render json: current_user, status: :ok 
+		else
+			render status: :bad_request
+		end	
+	end
+
+
 end
