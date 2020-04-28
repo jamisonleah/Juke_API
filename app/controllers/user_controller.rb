@@ -12,9 +12,10 @@ class UserController < ApplicationController
 		render json: "You can enter this data"
 	end
 	def spotify_access_token
-		access_token = params[:access_token] 
-		current_user.spotify_account_token = access_token 
-
+		puts(params[:access_token])
+		puts("Hello")
+		current_user.spotify_account_token = params[:access_token] 
+		current_user.spotify_refresh = params[:refresh_token] 
 		if current_user.save
 			render json: current_user, status: :ok 
 		else
