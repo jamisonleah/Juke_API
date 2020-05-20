@@ -1,0 +1,2 @@
+module PartyQueueHelper
+end

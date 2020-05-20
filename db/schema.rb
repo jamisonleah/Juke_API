@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_194414) do
+ActiveRecord::Schema.define(version: 2020_05_20_165351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "guestlists", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "party_queue_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["party_queue_id"], name: "index_guestlists_on_party_queue_id"
+    t.index ["user_id"], name: "index_guestlists_on_user_id"
+  end
 
   create_table "party_queues", force: :cascade do |t|
     t.string "name"

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   
   # predefined RESTful Routes
-  resources :party_queue, params: :party_code
+  resources :party_queue, params: :party_code, path: '/parties/'
 	
 
 
