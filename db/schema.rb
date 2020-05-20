@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_214225) do
+ActiveRecord::Schema.define(version: 2020_05_10_194414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "party_queues", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "party_code"
+    t.index ["user_id"], name: "index_party_queues_on_user_id"
+  end
+
+  create_table "song_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "party_queue_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "spotify_id"
+    t.integer "priority"
+    t.boolean "pending_status"
+    t.index ["party_queue_id"], name: "index_song_requests_on_party_queue_id"
+    t.index ["user_id"], name: "index_song_requests_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_04_23_214225) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.text "spotify_refresh"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

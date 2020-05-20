@@ -2,8 +2,13 @@ class UserController < ApplicationController
 	before_action :authenticate_user!
 
 	def spotify
-		spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-		render json: spotify_user
+		if current_user.spotify_account_token
+			render json: true
+			return
+		else
+			render json: false 
+			return 
+		end
 	end
 	def home 
 		render json: current_user
@@ -11,17 +16,9 @@ class UserController < ApplicationController
 	def info
 		render json: "You can enter this data"
 	end
-	def spotify_access_token
-		puts(params[:access_token])
-		puts("Hello")
-		current_user.spotify_account_token = params[:access_token] 
-		current_user.spotify_refresh = params[:refresh_token] 
-		if current_user.save
-			render json: current_user, status: :ok 
-		else
-			render status: :bad_request
-		end	
+	def partys
+		party = PartyHead.find_by(:user_id => current_user.id) 
+		render json: party
 	end
-
 
 end

@@ -78,6 +78,8 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
+    faker (1.9.6)
+      i18n (>= 0.7)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
@@ -86,9 +88,14 @@ GEM
     hashie (4.1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    json (1.8.6)
     jwt (2.2.1)
+    libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -166,6 +173,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    ref (2.0.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -189,6 +197,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -210,6 +221,8 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise_token_auth
+  faker (~> 1.6, >= 1.6.3)
+  httparty (~> 0.13.7)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
@@ -217,6 +230,7 @@ DEPENDENCIES
   rspotify
   spring
   spring-watcher-listen (~> 2.0.0)
+  therubyracer
   tzinfo-data
 
 RUBY VERSION
